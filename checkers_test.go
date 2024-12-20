@@ -38,9 +38,12 @@ func TestCheckers(t *testing.T) {
 	t.Run("property-based tests", func(t *testing.T) {
 		t.Parallel()
 		rapid.Check(t, func(t *rapid.T) {
-			//require.NotPanics(t, func() {
-			checkerPBT(t, fileGen())
-			//})
+			// If you comment out the next line (i.e. run the inner function outside
+			// require.NotPanics), the test will pass when run with:
+			// go test ./... -rapid.seed=11647171348957545426 -rapid.nofailfile
+			require.NotPanics(t, func() {
+				checkerPBT(t, fileGen())
+			})
 		})
 	})
 }
